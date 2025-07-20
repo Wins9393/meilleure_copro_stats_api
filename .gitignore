@@ -1,0 +1,24 @@
+# Environnements virtuels
+.venv/
+env/
+venv/
+
+# Fichiers Python compilés
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Data
+*.db
+*.csv
+
+# Logs
+*.log
+
+# IDE
+.vscode/
+.idea/
+
+# Mac / Linux
+.DS_Store

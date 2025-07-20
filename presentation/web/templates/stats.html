@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <title>MeilleureCopro – Stats & Import</title>
+  <style>
+    body { font-family: sans-serif; max-width: 800px; margin: auto; padding: 1rem; }
+    form { border: 1px solid #ccc; padding: 1rem; margin-bottom: 2rem; }
+    label { display: block; margin-top: 0.5rem; }
+    input { width: 100%; padding: 0.5rem; }
+    button { margin-top: 1rem; padding: 0.5rem 1rem; }
+    .result { background: #f9f9f9; padding: 1rem; border: 1px solid #ddd; }
+    .error { color: red; }
+  </style>
+</head>
+<body>
+  <h1>MeilleureCopro</h1>
+
+  <!-- Formulaire de filtres -->
+  <form method="get" action="/">
+    <h2>🔍 Filtrer les stats</h2>
+    <label>Département
+      <input type="text" name="dept_code" value="{{ filter.dept_code or '' }}" placeholder="ex. 75" />
+    </label>
+    <label>Ville
+      <input type="text" name="city" value="{{ filter.city or '' }}" placeholder="ex. Paris" />
+    </label>
+    <label>Code postal
+      <input type="text" name="zip_code" value="{{ filter.zip_code or '' }}" placeholder="ex. 75012" />
+    </label>
+    <button type="submit">Afficher les stats</button>
+  </form>
+
+  {% if stats %}
+    <div class="result">
+        <p><strong>Moyenne :</strong> {{ stats.average }}</p>
+        <p><strong>Quantile 10:</strong> {{ stats.quantile_10 }}</p>
+        <p><strong>Quantile 90:</strong> {{ stats.quantile_90 }}</p>
+        
+    </div>
+  {% elif error %}
+    <div class="error">{{ error }}</div>
+  {% endif %}
+
+  <!-- Formulaire d'ajout d'annonce -->
+  <form method="get" action="/">
+    <h2>➕ Ajouter une annonce (URL)</h2>
+    <label>URL Bienici
+      <input type="url" name="url" value="{{ url or '' }}" placeholder="https://www.bienici.com/..." />
+    </label>
+    <button type="submit">Ajouter</button>
+  </form>
+
+  {% if add_result %}
+    <div class="result">{{ add_result }}</div>
+  {% elif add_error %}
+    <div class="error">{{ add_error }}</div>
+  {% endif %}
+
+</body>
+</html>
